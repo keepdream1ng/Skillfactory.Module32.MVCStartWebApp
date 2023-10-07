@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Skillfactory.Module32.ASPCoreMVC.Middleware;
+using Skillfactory.Module32.MVCStartWebApp.Repositories;
 
 namespace Skillfactory.Module32.MVCStartWebApp;
 
@@ -40,9 +41,12 @@ public static class Program
         var config = builder.GetConfiguration();
         string connection = config.GetConnectionString("DefaultConnection");
         // Add services to the container.
-        builder.Services.AddDbContext<BlogContext>(options => options.UseSqlServer(connection));
-        builder.Services.AddControllersWithViews()
+        var services = builder.Services;
+        services.AddDbContext<BlogContext>(options => options.UseSqlServer(connection));
+        // It didnt work with HTML without RazorRuntime(
+        services.AddControllersWithViews()
             .AddRazorRuntimeCompilation();
+        services.AddScoped<IBlogRepository, BlogRepository>();
     }
 
     private static IConfigurationRoot GetConfiguration(this WebApplicationBuilder builder)
