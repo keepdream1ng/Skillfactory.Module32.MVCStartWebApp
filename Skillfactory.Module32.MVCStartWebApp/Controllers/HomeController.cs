@@ -35,6 +35,11 @@ public class HomeController : Controller
 
         return View();
     }
+    public async Task<IActionResult> Authors()
+    {
+        var authors = await _repository.GetUsers();
+        return View(authors);
+    }
 
     public IActionResult Privacy()
     {
