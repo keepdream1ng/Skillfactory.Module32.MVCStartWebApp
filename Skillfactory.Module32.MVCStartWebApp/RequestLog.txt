@@ -1,0 +1,3 @@
+// Only the valuable logs here...
+// Actual log file copied in the executable folder.
+
