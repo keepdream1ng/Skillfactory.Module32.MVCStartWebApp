@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Skillfactory.Module32.ASPCoreMVC.Middleware;
 
 namespace Skillfactory.Module32.MVCStartWebApp;
@@ -7,17 +8,8 @@ public static class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
-        // Get the connection string from appsettings.json
-        var configuration = builder.GetConfiguration();
-        string connectionString = configuration.GetConnectionString("DefaultConnection");
-
-        // Add services to the container.
-        builder.Services.AddControllersWithViews()
-            .AddRazorRuntimeCompilation();
-
+        builder.ConfigureServices();
         var app = builder.Build();
-
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
@@ -42,7 +34,18 @@ public static class Program
         app.Run();
     }
 
-    public static IConfigurationRoot GetConfiguration(this WebApplicationBuilder builder)
+    private static void ConfigureServices(this WebApplicationBuilder builder)
+    {
+        // Get the connection string from appsettings.json
+        var config = builder.GetConfiguration();
+        string connection = config.GetConnectionString("DefaultConnection");
+        // Add services to the container.
+        builder.Services.AddDbContext<BlogContext>(options => options.UseSqlServer(connection));
+        builder.Services.AddControllersWithViews()
+            .AddRazorRuntimeCompilation();
+    }
+
+    private static IConfigurationRoot GetConfiguration(this WebApplicationBuilder builder)
     {
         // Load configuration from appsettings.json
         return new ConfigurationBuilder()
