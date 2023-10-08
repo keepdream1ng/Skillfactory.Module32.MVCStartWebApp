@@ -16,29 +16,39 @@ public class UsersController : Controller
         _repository = repository;
     }
 
-    public async Task<IActionResult> Register()
+    public IActionResult Register()
     {
         // Добавим создание нового пользователя
         var newUser = new User()
         {
             Id = Guid.NewGuid(),
-            FirstName = "Andrey",
-            LastName = "Petrov",
-            JoinDate = DateTime.Now
         };
 
-        // Добавим в базу
-        await _repository.AddUser(newUser);
+        return View(newUser);
+    }
+    [HttpPost]
+    public async Task<IActionResult> Register(User newUser)
+    {
+        newUser.JoinDate = DateTime.Now;
 
-        // Выведем результат
-        Console.WriteLine($"User with id {newUser.Id}, named {newUser.FirstName} was successfully added on {newUser.JoinDate}");
+        // Validate and save the user data to a data source
+        if (ModelState.IsValid)
+        {
+            await _repository.AddUser(newUser);
+            Console.WriteLine($"New User Created: {newUser.FirstName} {newUser.LastName}, Join Date: {newUser.JoinDate}");
+            return RedirectToAction("UserAdded");
+        }
 
-        return View();
+        return View(newUser); // If model validation fails, return to the form with errors
     }
     public async Task<IActionResult> Index()
     {
         var authors = await _repository.GetUsers();
         return View(authors);
+    }
+    public IActionResult UserAdded()
+    {
+        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
