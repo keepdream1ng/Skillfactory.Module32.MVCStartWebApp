@@ -7,10 +7,10 @@ namespace Skillfactory.Module32.MVCStartWebApp.Controllers;
 
 public class UsersController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<UsersController> _logger;
     private readonly IBlogRepository _repository;
 
-    public UsersController(ILogger<HomeController> logger, IBlogRepository repository)
+    public UsersController(ILogger<UsersController> logger, IBlogRepository repository)
     {
         _logger = logger;
         _repository = repository;
