@@ -1,54 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Skillfactory.Module32.MVCStartWebApp.Models;
-using Skillfactory.Module32.MVCStartWebApp.Repositories;
 using System.Diagnostics;
 
-namespace Skillfactory.Module32.MVCStartWebApp.Controllers;
-
-public class HomeController : Controller
+namespace Skillfactory.Module32.MVCStartWebApp.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly IBlogRepository _repository;
-
-    public HomeController(ILogger<HomeController> logger, IBlogRepository repository)
+    public class HomeController : Controller
     {
-        _logger = logger;
-        _repository = repository;
-    }
+        private readonly ILogger<HomeController> _logger;
 
-    public async Task<IActionResult> Index()
-    {
-        // Добавим создание нового пользователя
-        var newUser = new User()
+        public HomeController(ILogger<HomeController> logger)
         {
-            Id = Guid.NewGuid(),
-            FirstName = "Andrey",
-            LastName = "Petrov",
-            JoinDate = DateTime.Now
-        };
+            _logger = logger;
+        }
 
-        // Добавим в базу
-        await _repository.AddUser(newUser);
+        public IActionResult Index()
+        {
+            return View();
+        }
 
-        // Выведем результат
-        Console.WriteLine($"User with id {newUser.Id}, named {newUser.FirstName} was successfully added on {newUser.JoinDate}");
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
-        return View();
-    }
-    public async Task<IActionResult> Authors()
-    {
-        var authors = await _repository.GetUsers();
-        return View(authors);
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
