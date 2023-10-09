@@ -43,10 +43,11 @@ public static class Program
         // Add services to the container.
         var services = builder.Services;
         services.AddDbContext<BlogContext>(options => options.UseSqlServer(connection));
+        services.AddScoped<IBlogRepository, BlogRepository>();
+        services.AddScoped<IRequestsRepository, RequestsRepository>();
         // It didnt work with HTML without RazorRuntime(
         services.AddControllersWithViews()
             .AddRazorRuntimeCompilation();
-        services.AddScoped<IBlogRepository, BlogRepository>();
     }
 
     private static IConfigurationRoot GetConfiguration(this WebApplicationBuilder builder)
