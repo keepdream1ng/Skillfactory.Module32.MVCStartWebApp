@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Skillfactory.Module32.ASPCoreMVC.Middleware;
-using Skillfactory.Module32.MVCStartWebApp.Repositories;
 
 namespace Skillfactory.Module32.MVCStartWebApp;
 

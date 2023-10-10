@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Skillfactory.Module32.MVCStartWebApp.Repositories;
+namespace Skillfactory.Module32.DAL;
 
 public class BlogRepository : IBlogRepository
 {

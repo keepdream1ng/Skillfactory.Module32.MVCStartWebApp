@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Skillfactory.Module32.MVCStartWebApp.Models;
-using Skillfactory.Module32.MVCStartWebApp.Repositories;
 using System.Diagnostics;
 
 namespace Skillfactory.Module32.MVCStartWebApp.Controllers;

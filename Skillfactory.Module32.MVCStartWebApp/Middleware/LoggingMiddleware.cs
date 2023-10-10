@@ -1,5 +1,4 @@
 ﻿using Skillfactory.Module32.MVCStartWebApp;
-using Skillfactory.Module32.MVCStartWebApp.Repositories;
 
 namespace Skillfactory.Module32.ASPCoreMVC.Middleware;
 public class LoggingMiddleware

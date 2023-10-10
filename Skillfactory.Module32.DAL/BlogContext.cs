@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Skillfactory.Module32.MVCStartWebApp;
+namespace Skillfactory.Module32.DAL;
 
 public sealed class BlogContext : DbContext
 {

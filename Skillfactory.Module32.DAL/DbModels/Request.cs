@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Skillfactory.Module32.MVCStartWebApp;
+namespace Skillfactory.Module32.DAL;
 
 [Table("Requests")]
 public class Request

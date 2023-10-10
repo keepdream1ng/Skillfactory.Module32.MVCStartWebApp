@@ -1,4 +1,4 @@
-﻿namespace Skillfactory.Module32.MVCStartWebApp;
+﻿namespace Skillfactory.Module32.DAL;
 public class User
 {
     public Guid Id { get; set; }
